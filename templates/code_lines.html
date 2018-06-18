@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代码统计</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/sweetalert/sweetalert.css">
+    <style>
+        body {
+            background-image: url("http://litta.co/wp-content/uploads/2017/06/homescreen.jpeg");
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+
+        <table class="table table-condensed col-md-6 ">
+            <thead>
+            <tr>
+                <th class="text-center">总行数</th>
+                <th class="text-center">代码行数</th>
+                <th class="text-center">注释行数</th>
+                <th class="text-center">空白行数</th>
+                <th class="text-center">文件大小</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td class="text-center success">{{ code.code_sum }}</td>
+                <td class="text-center warning">{{ code.code_lines }}</td>
+                <td class="text-center danger">{{ code.comment_lines }}</td>
+                <td class="text-center info">{{ code.blank_lines }}</td>
+                <td class="text-center warning">{{ code.size }}</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+
+</body>
+</html>

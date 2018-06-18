@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>代码统计</title>
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/sweetalert/sweetalert.css">
+
+    <style>
+        body {
+            background-image: url("http://litta.co/wp-content/uploads/2017/06/homescreen.jpeg");
+            background-position: center 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            -webkit-background-size: cover;
+            -o-background-size: cover;
+            -moz-background-size: cover;
+            -ms-background-size: cover;
+        }
+
+        .main {
+            margin-top: 100px;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+
+        <form id="b_form" class="main" action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <input type="file" id="exampleInputFile" name="tp">
+            </div>
+            <button id="b_sub" type="button" class="btn btn-success">Submit</button>
+        </form>
+        <hr>
+        <table id="tb" class="table table-condensed hide">
+            <thead>
+            <tr>
+                <th class="text-center success">总行数</th>
+                <th class="text-center warning">代码行数</th>
+                <th class="text-center danger">注释行数</th>
+                <th class="text-center info">空白行数</th>
+                <th class="text-center warning">文件大小</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td id="td_code_sum" class="text-center success">code_sum</td>
+                <td id="td_code_lines" class="text-center warning">code_lines</td>
+                <td id="td_comment_lines" class="text-center danger">comment_lines</td>
+                <td id="td_blank_lines" class="text-center info">blank_lines</td>
+                <td id="td_size" class="text-center warning">size</td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+<script src="/static/jquery-3.3.1.min.js"></script>
+<script src="/static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+<script>
+
+    let set_table = function(data){
+        $('#tb').removeClass('hide');
+        $('#td_code_sum').text(data.code_sum);
+        $('#td_code_lines').text(data.code_lines);
+        $('#td_comment_lines').text(data.comment_lines);
+        $('#td_blank_lines').text(data.blank_lines);
+        $('#td_size').text(data.file_size)
+    }
+
+    $('#b_sub').on('click', function () {
+        let targetUrl = '/index2/';
+        let data = new FormData($('#b_form')[0]);
+        $.ajax({
+            type: 'post',
+            url: targetUrl,
+            cache: false,    //上传文件不需缓存
+            processData: false, //需设置为false。因为data值是FormData对象，不需要对数据做处理
+            contentType: false, //需设置为false。因为是FormData对象，且已经声明了属性enctype="multipart/form-data"
+            data: data,
+            dataType: 'json',
+            success: function (data) {
+               set_table(data)
+
+            },
+            error: function () {
+                alert("请求失败")
+            }
+        })
+    });
+</script>
+</body>
+</html>
