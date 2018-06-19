@@ -74,6 +74,7 @@ def get_code_ajax(request):
         return JsonResponse(code_details)
     return render(request, 'index2.html')
 
+
 # 统计代码
 def code_count(path):
     """
